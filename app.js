@@ -1,0 +1,59 @@
+const path = require('path');
+const express = require('express');
+const morgan = require('morgan');
+const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const bodyParser = require("body-parser");
+
+const loginRouter = require('./routes/login-router');
+const usersRouter = require('./routes/user-router');
+const bordRouter = require('./routes/bord-router');
+
+
+dotenv.config();
+const app = express();
+app.set('port', process.env.PORT || 3000);
+app.set('view engine', 'html');
+app.use(bodyParser.urlencoded({
+    extended: true
+}))
+app.use(bodyParser.json())
+app.use(
+    morgan('dev'),
+    express.static(path.join(__dirname, 'public')),
+    express.static(path.join(__dirname, 'public/users')),
+    express.static(path.join(__dirname, 'public/login')),
+    express.json(),
+    express.urlencoded({extended: false}),
+    cookieParser(process.env.SECRET),
+    session({
+        resave: false,
+        saveUninitialized: false,
+        secret: process.env.SECRET,
+        cookie: {
+            httpOnly: true,
+            secure: false
+        },
+        name: 'session-cookie'
+    })
+);
+
+app.use('/login', loginRouter);
+app.use('/users', usersRouter);
+app.use('/bord', bordRouter);
+
+app.get('/favicon.ico', (req, res) => res.status(204));
+
+app.use((req, res, next) => {
+    next('Not found error!');
+});
+
+
+app.use((err, req, res, next) => {
+    res.status(500).send(err);
+});
+
+app.listen(app.get('port'), () => {
+    console.log(app.get('port'), '번 포트에서 대기 중');
+});
