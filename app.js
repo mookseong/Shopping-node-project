@@ -22,8 +22,8 @@ app.use(bodyParser.json())
 app.use(
     morgan('dev'),
     express.static(path.join(__dirname, 'public')),
-    express.static(path.join(__dirname, 'public/users')),
-    express.static(path.join(__dirname, 'public/login')),
+    express.static(path.join(__dirname, 'view/users')),
+    express.static(path.join(__dirname, 'view/login')),
     express.json(),
     express.urlencoded({extended: false}),
     cookieParser(process.env.SECRET),
