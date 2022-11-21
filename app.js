@@ -8,7 +8,6 @@ const bodyParser = require("body-parser");
 
 const loginRouter = require('./routes/login-router');
 const usersRouter = require('./routes/user-router');
-const bordRouter = require('./routes/bord-router');
 
 
 dotenv.config();
@@ -21,7 +20,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 app.use(
     morgan('dev'),
-    express.static(path.join(__dirname, 'public')),
+    express.static(path.join(__dirname, 'view')),
     express.static(path.join(__dirname, 'view/users')),
     express.static(path.join(__dirname, 'view/login')),
     express.json(),
@@ -41,7 +40,6 @@ app.use(
 
 app.use('/login', loginRouter);
 app.use('/users', usersRouter);
-app.use('/bord', bordRouter);
 
 app.get('/favicon.ico', (req, res) => res.status(204));
 
