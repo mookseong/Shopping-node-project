@@ -8,6 +8,7 @@
   "author": "Prof. Wonvin Kim, Computer Software, Korean Bibie University",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
@@ -17,7 +18,8 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "node-clone-js": "^1.1.1",
-    "qrcode": "^1.5.1"
+    "qrcode": "^1.5.1",
+    "sequelize": "^6.25.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"

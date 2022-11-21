@@ -1,11 +1,10 @@
-const clone = require("node-clone-js");
+import User from "../models/user";
 
-users = {}
 
-exports.getUser = () => clone(users)
-exports.setUser = (id, name, birth, gender, img) => {
-    users[id] = {name: `${name}`, birth: `${birth}`, gender: `${gender}`, img: `${img}` }
-};
-exports.deleteUser = (id) =>{
-    delete users[id];
-}
+exports.findUserById = (id) => User.findOne({where: {id}});
+
+exports.deleteUser = (id) => User.destroy({where: {id: id}});
+
+exports.getUser = (id) => User.findOne({
+    where: {id: id}, attributes: ['id', 'name', 'description']
+});

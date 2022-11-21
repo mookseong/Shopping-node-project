@@ -1,6 +1,6 @@
 const express = require('express');
 const session = require("express-session");
-const {getUser} = require("../repository/user-repository");
+const {getUser} = require("../service/user-service");
 const router = express.Router();
 
 /* GET users listing. */
