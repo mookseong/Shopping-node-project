@@ -11,7 +11,7 @@ exports.findAllUser = (req, res, next) => {
 exports.createUser = (req, res, next) => {
     const {id, name, birth, gender} = req.body;
     try {
-        res.send(userService.setUser(id, name, birth, gender, req?.file?.path));
+        res.send(userService.createUser(id, name, birth, gender, req?.file?.path));
     } catch (e) {
         console.log(`Error : ${e}`);
         res.send("입력되지 않은 값이 존재합니다.");
@@ -24,6 +24,6 @@ exports.updateUser = (req, res, next) => {
 }
 exports.deleteUser = (req, res) => {
     const id = req?.query?.id;
-    res.send(userService.removeUser(id));
+    res.send(userService.deleteUser(id));
 }
 
