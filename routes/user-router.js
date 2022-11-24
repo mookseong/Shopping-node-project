@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require("body-parser");
 const router = express.Router();
 const userController = require("../controller/user-controller")
-const imgRepository = require("../service/img-service");
 
 router.use(bodyParser.json());
 router.get('/', (_, res) => res.redirect(301, '/users/index.html'));
@@ -18,10 +17,10 @@ router.get('/all', userController.findAllUser)
 router.get('/rid', userController.findUser);
 
 // 사용자 정보 추가 API
-router.post('/cid', imgRepository.upload.single('image'), userController.createUser);
+router.post('/cid', userController.createUser);
 
 // 사용자 정보 수정 API
-router.post('/uid', imgRepository.upload.single('image'), userController.updateUser);
+router.post('/uid', userController.updateUser);
 
 // 사용자 정보 삭제 API
 router.get('/did', userController.deleteUser);

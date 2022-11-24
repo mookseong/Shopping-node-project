@@ -22,7 +22,6 @@ router.post('/iid', (req, res, next) => {
         res.setHeader('Set-Cookie', `connect.id=${privateKey}; path=/`);
         res.redirect(302, '/');
     } else {
-        // alert("회원이 존재하지 않습니다.");
         res.redirect(302, '/login');
     }
 
