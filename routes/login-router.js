@@ -24,8 +24,8 @@ router.post('/iid', (req, res, next) => {
     } else {
         res.redirect(302, '/login');
     }
-
 });
+
 //logout
 router.get('/oid', (req, res, next) => {
     const [, privateKey] = req.headers.cookie.split('=');

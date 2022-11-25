@@ -10,18 +10,12 @@ router.get('/read', (_, res) => res.redirect(301, '/users/read.html'));
 router.get('/update', (_, res) => res.redirect(301, '/users/update.html'));
 router.get('/delete', (_, res) => res.redirect(301, '/users/delete.html'));
 
-// 사용자 정보 전체
-router.get('/all', userController.findAllUser)
-
 // 사용자 정보 조회 API
 router.get('/rid', userController.findUser);
-
 // 사용자 정보 추가 API
 router.post('/cid', userController.createUser);
-
 // 사용자 정보 수정 API
 router.post('/uid', userController.updateUser);
-
 // 사용자 정보 삭제 API
 router.get('/did', userController.deleteUser);
 
