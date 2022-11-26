@@ -1,30 +1,36 @@
 const userService = require("../service/user-service");
 
 exports.findUser = (req, res, next) => {
-    res.send(userService.getUser(req?.query?.id));
+    res.send(userService.getUser(req.params.id));
 };
 
 exports.findAllUser = (req, res, next) => {
-    res.send(JSON.stringify(userService.getAllUser()));
+
 };
 
 exports.createUser = (req, res, next) => {
     const {id, name, birth, description} = req.body;
     try {
-        userService.createUser(id, name, birth, description)
-            .then(r => res.redirect('/'));
-
+        userService.createUser(id, name, birth, description).then(r => {
+            if (r) res.redirect('/'); else next('유저정보를 생성에 실패 했습니다.')
+        });
     } catch (e) {
-        res.send("입력되지 않은 값이 존재합니다.");
+        res.send("오류가 발생했습니다.");
+        console.log(`Error : ${e}`);
     }
 };
 exports.updateUser = (req, res, next) => {
     const {id, name, birth, gender} = req.body;
-    res.send(userService.putUser(id, name, birth, gender, req));
+    userService.updateUser(id, name, birth, gender, req).then(r => {
+        if (r) res.redirect('/'); else next('유저정보를 업데이트 실패 했습니다.')
+    });
+    res.send();
 
 }
-exports.deleteUser = (req, res) => {
+exports.deleteUser = (req, res, next) => {
     const id = req?.query?.id;
-    res.send(userService.deleteUser(id));
+    userService.deleteUser(id).then(r => {
+        if (r) res.redirect('/'); else next('유저정보를 생성에 실패 했습니다.')
+    });
 }
 
