@@ -1,91 +1,23 @@
-const Bord = require("../models/bord");
-const User = require("../models/user");
-const fs = require('fs');
+const bordRepository = require("../repository/bord-repository");
 
-exports.createBord = async(req, res, next) => {
-    const content = req.body.content;
-    const img = req.body.url;
-    const userId = req.user.id;
-
-    try {
-        await Bord.create({content, img, userId});
-        res.redirect('/');
-    } catch (err) {
-        console.error(err);
-        next(err)
-    }
+exports.createBord = async (content, img) => {
+    await bordRepository.createBord(id, {content, img});
 };
 
-exports.readBord = async(req, res, next) => {
-    try {
-        const user = await User.findOne({
-            where: {id: req.params.id}
-        });
-        if (user) {
-            const content = await user.getContent();
-            res.json(content);
-        } else {
-            next(`There is no user with ${req.params.id}.`);
-        }
-    } catch (err) {
-        console.error(err);
-        next(err);
-    }
+exports.updateBord = async (id, content, img) => {
+    const result = await bordRepository.updateBord(id, content, img);
+    if (!result) throw 'Not updated!';
+    console.log(`${id}의 게시글 업데이트 완료`);
 };
 
-exports.updateBord = async(req, res, next) => {
-    try {
-        const result = await Bord.update({
-            content: req.body.content,
-            img: req.body.url,
-        }, {where: { id: req.body.id}});
-
-        if (result) res.redirect('/');
-        else next('Not updated!');
-    } catch (err) {
-        console.error(err);
-        next(err);
-    }
+exports.deleteBord = async (id) => {
+    const result = await bordRepository.deleteBord(id);
+    if (!result) throw 'No bord to delete!';
+    console.log(`${id} 의 게시글 삭제 완료`);
 };
 
-exports.deleteBord = async(req, res, next) => {
-    try {
-        const checkImage = await Bord.findOne({ where: {id: req.params.id}});
-        if (checkImage) {
-            console.log(checkImage.img);
-            try {
-                fs.unlinkSync(`uploads/${checkImage.img.slice(5)}`)
-            } catch (err) {
-                if (err.code === "ENOENT") {
-                    console.log("파일이 존재하지 않습니다.");
-                }
-            }
-        }
-        const result = await Bord.destroy({ where: {id: req.params.id}});
-        if (result) {
-            res.json(result);
-        } else {
-            res.status(404).send('No bord to delete');
-        }
-    } catch (err) {
-        console.error(err);
-        next(err);
-    }
-};
-
-exports.join = async(req, res, next) => {
-    try {
-        const user = await User.findOne({
-            where: {id: req.params.id},
-            attributes: [],
-            include: [{
-                model: Bord,
-                attributes: ['content', 'img']
-            }]
-        });
-        res.json(user);
-    } catch (err) {
-        console.error(err);
-        next(err);
-    }
+exports.getBord = async (id) => {
+    const bord = await bordRepository.getBord(id);
+    if (!bord) throw `There is no bord with ${id}`;
+    return bord;
 };
