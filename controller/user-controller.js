@@ -4,33 +4,36 @@ exports.findUser = (req, res, next) => {
     res.send(userService.getUser(req.params.id));
 };
 
-exports.findAllUser = (req, res, next) => {
-
-};
-
 exports.createUser = (req, res, next) => {
-    const {id, name, birth, description} = req.body;
-    try {
-        userService.createUser(id, name, birth, description).then(r => {
-            if (r) res.redirect('/'); else next('유저정보를 생성에 실패 했습니다.')
-        });
-    } catch (e) {
-        res.send("오류가 발생했습니다.");
-        console.log(`Error : ${e}`);
-    }
+    const {id, password, name, description} = req.body;
+    userService.createUser(id, password, name, description)
+        .then(res.redirect('/'))
+        .catch(
+            err => {
+                next(err);
+                console.log(`Error : ${err}`);
+            }
+        );
 };
 exports.updateUser = (req, res, next) => {
-    const {id, name, birth, gender} = req.body;
-    userService.updateUser(id, name, birth, gender, req).then(r => {
-        if (r) res.redirect('/'); else next('유저정보를 업데이트 실패 했습니다.')
-    });
-    res.send();
-
+    userService.updateUser(req.body.id, req.body.description)
+        .then(res.redirect('/'))
+        .catch(
+            err => {
+                next(err);
+                console.log(`유저정보를 업데이트 실패 했습니다. Error : ${err}`);
+            }
+        );
 }
 exports.deleteUser = (req, res, next) => {
     const id = req?.query?.id;
-    userService.deleteUser(id).then(r => {
-        if (r) res.redirect('/'); else next('유저정보를 생성에 실패 했습니다.')
-    });
+    userService.deleteUser(id)
+        .then(res.redirect('/'))
+        .catch(
+            err => {
+                next(err);
+                console.log(`'유저정보를 생성에 실패 했습니다. Error : ${err}`);
+            }
+        );
 }
 

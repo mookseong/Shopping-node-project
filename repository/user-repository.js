@@ -2,9 +2,9 @@ const User = require('../models/user');
 
 exports.findUserById = (id) => User.findOne({where: {id}});
 
-exports.createUser = (id, hash, name, description) => User.create({id, password: hash, name, description});
+exports.createUser = (id, password, name, description) => User.create({id, password, name, description});
 
-exports.deleteUser = (id) => User.destroy({where: {id: id}});
+exports.deleteUser = (id) => User.destroy({where: {id}});
 
 exports.getUser = (id) => User.findOne({
     where: {id: id}, attributes: ['id', 'name', 'description']
