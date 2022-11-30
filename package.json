@@ -1,11 +1,11 @@
 {
-  "name": "ddddddd",
+  "name": "file-drop-project",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
     "start": "nodemon"
   },
-  "author": "dddddd",
+  "author": "Mookseong, Donghwi Kim",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -19,6 +19,9 @@
     "multer": "^1.4.5-lts.1",
     "mysql2": "^2.3.3",
     "node-clone-js": "^1.1.1",
+    "passport": "^0.6.0",
+    "passport-kakao": "^1.0.1",
+    "passport-local": "^1.0.0",
     "qrcode": "^1.5.1",
     "sequelize": "^6.25.8"
   },

@@ -9,6 +9,10 @@ const bodyParser = require("body-parser");
 const nunjucks = require('nunjucks');
 const { sequelize } = require('./models');
 
+const passport = require('passport');
+const passportConfig = require('./passport');
+
+const authRouter = require('./routes/login-router');
 const loginRouter = require('./routes/login-router');
 const usersRouter = require('./routes/user-router');
 
@@ -47,7 +51,10 @@ app.use(
         name: 'session-cookie'
     })
 );
+app.use(passport.initialize());
+app.use(passport.session());
 
+app.use('/auth', authRouter);
 app.use('/login', loginRouter);
 app.use('/users', usersRouter);
 
