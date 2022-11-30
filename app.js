@@ -57,7 +57,6 @@ app.use((req, res, next) => {
     next('Not found error!');
 });
 
-
 app.use((err, req, res, next) => {
     res.status(500).send(err);
 });

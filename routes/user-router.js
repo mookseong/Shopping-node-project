@@ -20,14 +20,12 @@ router.post('/uid', userController.updateUser);
 // 사용자 정보 삭제 API
 router.get('/did', userController.deleteUser);
 
-
-router.use((req, res, next) => {
+router.use(( req, res, next) => {
     next('Not found error!');
 });
 
-
 router.use((err, req, res, next) => {
-    res.status(500).send(err);
+    res.status(500).send(err.toString());
 });
 
 module.exports = router;
