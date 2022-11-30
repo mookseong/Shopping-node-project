@@ -1,15 +1,11 @@
 const bordService = require("../service/bord-service")
 
-exports.findBord = (req, res, next) => {
-    res.send(bordService.getBord(req.params.id));
-};
-
 exports.createBord = (req, res, next) => {
     const content = req.body.content;
     const img = req.body.url;
     const id = req.body.id;
 
-    bordService.createBord(content, img)
+    bordService.createBord(id, content, img)
         .then(res.redirect('/'))
         .catch(
             err => {
@@ -18,6 +14,14 @@ exports.createBord = (req, res, next) => {
             }
         );
 };
+
+exports.findBord = (req, res, next) => {
+    res.send(bordService.getBord(req.params.id));
+};
+
+exports.allBord = (req, res, next) => {
+    res.send(JSON.stringify(bordService.allBord()));
+}
 
 exports.updateBord = (req, res, next) => {
     bordService.updateBord(req.body.id, req.body.content, req.body.url)
