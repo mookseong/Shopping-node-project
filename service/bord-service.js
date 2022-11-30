@@ -1,7 +1,7 @@
 const bordRepository = require("../repository/bord-repository");
 
-exports.createBord = async (content, img) => {
-    await bordRepository.createBord(id, {content, img});
+exports.createBord = async (id, content, img) => {
+    await bordRepository.createBord(id, content, img);
 };
 
 exports.updateBord = async (id, content, img) => {
@@ -21,3 +21,5 @@ exports.getBord = async (id) => {
     if (!bord) throw `There is no bord with ${id}`;
     return bord;
 };
+
+exports.allBord = (id) => bordRepository.getAllbord()
