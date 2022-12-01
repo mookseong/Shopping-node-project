@@ -4,6 +4,14 @@ exports.createBord = async (id, content, img) => {
     await bordRepository.createBord(id, content, img);
 };
 
+exports.getBord = async (id) => {
+    const bord = await bordRepository.getBord(id);
+    if (!bord) throw `There is no bord with ${id}`;
+    return bord;
+};
+
+exports.allBord = () => bordRepository.getAllbord();
+
 exports.updateBord = async (id, content, img) => {
     const result = await bordRepository.updateBord(id, content, img);
     if (!result) throw 'Not updated!';
@@ -15,11 +23,3 @@ exports.deleteBord = async (id) => {
     if (!result) throw 'No bord to delete!';
     console.log(`${id} 의 게시글 삭제 완료`);
 };
-
-exports.getBord = async (id) => {
-    const bord = await bordRepository.getBord(id);
-    if (!bord) throw `There is no bord with ${id}`;
-    return bord;
-};
-
-exports.allBord = (id) => bordRepository.getAllbord()

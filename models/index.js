@@ -22,7 +22,6 @@ User.init(sequelize);
 Comment.init(sequelize);
 Bord.init(sequelize);
 
-
 User.associate(db);
 Comment.associate(db);
 Bord.associate(db);

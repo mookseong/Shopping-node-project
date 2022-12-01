@@ -6,24 +6,3 @@ exports.createQRCode = (text) => {
         return new Buffer.from(data, "base64");
     });
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
