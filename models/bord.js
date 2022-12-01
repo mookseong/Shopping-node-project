@@ -24,6 +24,6 @@ module.exports = class Bord extends Sequelize.Model {
   }
 
   static associate(db) {
-    db.bord.belongsTo(db.User, { foreignKey: 'userId', targetKey: 'id' });
+    db.Bord.belongsTo(db.User, { foreignKey: 'userId', targetKey: 'id' });
   }
 };
