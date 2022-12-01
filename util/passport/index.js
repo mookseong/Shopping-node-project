@@ -1,6 +1,6 @@
 const passport = require('passport');
 const local = require('./local');
-const userRepository = require("../repository/user-repository");
+const userRepository = require("../../repository/user-repository");
 
 
 module.exports = () => {

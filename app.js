@@ -10,7 +10,7 @@ const nunjucks = require('nunjucks');
 const { sequelize } = require('./models');
 
 const passport = require('passport');
-const passportConfig = require('./passport');
+const passportConfig = require('./util/passport');
 
 const authRouter = require('./routes/login-router');
 const loginRouter = require('./routes/login-router');

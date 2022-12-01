@@ -14,7 +14,6 @@ exports.createUser = (req, res, next) => {
                 next(err);
             }
         )
-    //res.redirect('/')
 };
 exports.updateUser = (req, res, next) => {
     userService.updateUser(req.body.id, req.body.description)
@@ -32,7 +31,7 @@ exports.deleteUser = (req, res, next) => {
         .then(() => res.redirect('/'))
         .catch(
             err => {
-                console.error(`'[UserService]유저 정보 삭제실패. Error : ${err}`);
+                console.error(`[UserService]유저 정보 삭제실패. Error : ${err}`);
                 next(err);
             }
         );
