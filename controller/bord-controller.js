@@ -6,7 +6,7 @@ exports.createBord = (req, res, next) => {
     const id = req.body.id;
 
     bordService.createBord(id, content, img)
-        .then(res.redirect('/'))
+        .then(() => res.redirect('/'))
         .catch(
             err => {
                 next(err);
@@ -25,7 +25,7 @@ exports.allBord = (req, res, next) => {
 
 exports.updateBord = (req, res, next) => {
     bordService.updateBord(req.body.id, req.body.content, req.body.url)
-    .then(res.redirect('/'))
+    .then(() => res.redirect('/'))
     .catch(
         err => {
             next(err);
@@ -37,7 +37,7 @@ exports.updateBord = (req, res, next) => {
 exports.deleteBord = (req, res, next) => {
     const id = req?.query?.id;
     bordService.deleteBord(id)
-        .then(res.redirect('/'))
+        .then(() => res.redirect('/'))
         .catch(
             err => {
                 next(err);

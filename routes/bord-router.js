@@ -23,7 +23,7 @@ router.use((req, res, next) => {
 
 
 router.use((err, req, res, next) => {
-    res.status(500).send(err);
+    res.status(500).send(err.toString());
 });
 
 module.exports = router;
