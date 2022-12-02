@@ -15,6 +15,7 @@ const passportConfig = require('./passport');
 const authRouter = require('./routes/login-router');
 const loginRouter = require('./routes/login-router');
 const usersRouter = require('./routes/user-router');
+const bordRouter = require('./routes/bord-router');
 
 
 dotenv.config();
@@ -37,6 +38,7 @@ app.use(
     express.static(path.join(__dirname, 'view')),
     express.static(path.join(__dirname, 'view/users')),
     express.static(path.join(__dirname, 'view/login')),
+    express.static(path.join(__dirname, 'view/bord')),
     express.json(),
     express.urlencoded({extended: false}),
     cookieParser(process.env.SECRET),
@@ -57,6 +59,7 @@ app.use(passport.session());
 app.use('/auth', authRouter);
 app.use('/login', loginRouter);
 app.use('/users', usersRouter);
+app.use('/bord', bordRouter);
 
 app.get('/favicon.ico', (req, res) => res.status(204));
 
