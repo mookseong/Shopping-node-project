@@ -15,6 +15,9 @@
         <form id="form1" action="menu.html" method="get">
             <button style="width: 200px" type="submit">메뉴 이동</button>
         </form>
+        <form id="form3" action="/bord" method="get">
+            <button style="width: 200px" type="submit">게시판</button>
+        </form>
         {% else %}
             <form id="form2" action="auth/login" method="post">
                 <input type="text" name="id" placeholder="ID" /><br>
@@ -25,6 +28,7 @@
                 <button style="width: 200px" type="submit">회원가입</button>
             </form>
     {% endif %}
+
 
 </body>
 </html>

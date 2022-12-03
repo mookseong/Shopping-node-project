@@ -15,4 +15,4 @@ exports.updateBord = (id, content, img) => Bord.update({
     img: img
 }, {where: {id: id}});
 
-exports.deleteBord = (id) => Bord.destory({where: {id}});
+exports.deleteBord = (id) => Bord.destroy({where: {id}});
