@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>게시판 등록</title>
+</head>
+
+<body>
+    <form id="form" action="/board/cbd" method="post" enctype="application/x-www-form-urlencoded">
+        게시글 등록<br><br>
+        <label>
+            <input style="width: 200px" type="text" name="num" placeholder="PostNumber" required />
+        </label><br>
+        <label>
+            <input style="width: 200px" type="text" name="title" placeholder="Title" required />
+        </label><br>
+        <label>
+            <input style="width: 200px" type="text" name="content" placeholder="Content" />
+        </label><br>
+        <button style="width: 200px" type="submit">추가</button>
+        <br>
+    </form>
+</body>
+</html>

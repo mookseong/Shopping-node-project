@@ -17,7 +17,7 @@ const usersRouter = require('./routes/user-router');
 const menuRouter = require('./routes/menu-router');
 const fileManagementRouter = require('./routes/file-router')
 const indexRouter = require('./routes');
-const bordRouter = require('./routes/bord-router');
+const bordRouter = require('./routes/board-router');
 
 
 dotenv.config();
@@ -42,7 +42,7 @@ app.use(
     express.static(path.join(__dirname, 'view')),
     express.static(path.join(__dirname, 'view/users')),
     express.static(path.join(__dirname, 'view/login')),
-    express.static(path.join(__dirname, 'view/bord')),
+    express.static(path.join(__dirname, 'view/board')),
     express.json(),
     express.urlencoded({extended: false}),
     cookieParser(process.env.SECRET),
@@ -65,7 +65,7 @@ app.use('/users', usersRouter);
 app.use('/menu', menuRouter);
 app.use('/file', fileManagementRouter);
 app.use('/', indexRouter);
-app.use('/bord', bordRouter);
+app.use('/board', bordRouter);
 
 app.get('/favicon.ico', (req, res) => res.status(204));
 app.use((req, res) =>
@@ -78,7 +78,7 @@ app.use((req, res, next) => {
     next('Not found error!');
 });
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
     res.status(500).send(err);
 });
 
