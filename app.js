@@ -10,22 +10,26 @@ const nunjucks = require('nunjucks');
 const { sequelize } = require('./models');
 
 const passport = require('passport');
-const passportConfig = require('./util/passport');
+const passportConfig = require('./passport');
 
-const authRouter = require('./routes/login-router');
 const loginRouter = require('./routes/login-router');
 const usersRouter = require('./routes/user-router');
+const menuRouter = require('./routes/menu-router');
+const fileManagementRouter = require('./routes/file-router')
+const indexRouter = require('./routes');
 
 
 dotenv.config();
+passportConfig();
+
 const app = express();
 app.set('port', process.env.PORT || 3000);
-
 app.set('view engine', 'html');
 nunjucks.configure(path.join(__dirname, 'views'), {
     express: app,
     watch: true,
 });
+
 
 sequelize.sync({ force: false })
     .then(() => console.log('데이터베이스 연결 성공'))
@@ -54,12 +58,19 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/auth', authRouter);
-app.use('/login', loginRouter);
+app.use('/auth', loginRouter);
 app.use('/users', usersRouter);
+app.use('/menu', menuRouter);
+app.use('/file', fileManagementRouter);
+app.use('/', indexRouter);
 
 app.get('/favicon.ico', (req, res) => res.status(204));
-
+app.use((req, res) =>
+    res.render('index', {
+        title: require('./package.json').name,
+        port: app.get('port'),
+        user: req.user
+    }));
 app.use((req, res, next) => {
     next('Not found error!');
 });
