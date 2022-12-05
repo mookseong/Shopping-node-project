@@ -1,13 +1,11 @@
 const express = require('express');
-const bodyParser = require("body-parser");
+const bcrypt = require('bcrypt')
+const User = require('../models/user');
+
+const { logout } = require('./helpers');
+
+
 const router = express.Router();
-const userController = require("../controller/user-controller")
-const User = require("../models/user");
-const bcrypt = require("bcrypt");
-const {logout} = require("./helpers");
-
-router.use(bodyParser.json());
-
 
 router.route('/')
     .get(async (req, res, next) => {
@@ -96,22 +94,19 @@ router.get('/:id/comments', async (req, res, next) => {
     }
 });
 
+router.get('/:id', async (req, res, next) => {
+    try {
+        const user = await User.findOne({
+            where: { id: req.params.id },
+            attributes: ['id', 'name', 'description']
+        });
 
-// 사용자 정보 조회 API
-router.get('/:id', userController.findUser);
-// 사용자 정보 추가 API
-router.post('/cid', userController.createUser);
-// 사용자 정보 수정 API
-router.post('/uid', userController.updateUser);
-// 사용자 정보 삭제 API
-router.get('/did', userController.deleteUser);
-
-router.use(( req, res, next) => {
-    next('Not found error!');
-});
-
-router.use((err, req, res, next) => {
-    res.status(500).send(err.toString());
+        if (user) res.json(user);
+        else next(`There is no user with ${req.params.id}.`);
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
 });
 
 module.exports = router;

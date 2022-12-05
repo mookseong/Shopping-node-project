@@ -2,8 +2,6 @@ const passport = require('passport');
 const Strategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
-const userRepository = require('../repository/user-repository')
-
 const User = require('../models/user');
 
 module.exports = () => {
@@ -14,7 +12,7 @@ module.exports = () => {
 
     try {
 
-      const user = await userRepository.findUserById(id);
+      const user = await User.findOne({ where: { id } });
 
       if (user && await bcrypt.compare(password, user.password))
         done(null, user);

@@ -1,48 +1,42 @@
 const path = require('path');
+
+const dotenv = require('dotenv');
+
 const express = require('express');
 const morgan = require('morgan');
-const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const bodyParser = require("body-parser");
 
 const nunjucks = require('nunjucks');
-const { sequelize } = require('./models');
+const {sequelize} = require('./models');
 
 const passport = require('passport');
 const passportConfig = require('./passport');
 
-const loginRouter = require('./routes/login-router');
-const usersRouter = require('./routes/user-router');
-const menuRouter = require('./routes/menu-router');
-const fileManagementRouter = require('./routes/file-router')
+const authRouter = require('./routes/auth');
+const userRouter = require('./routes/user');
+const commentRouter = require('./routes/comment');
 const indexRouter = require('./routes');
-const bordRouter = require('./routes/board-router');
-
 
 dotenv.config();
 passportConfig();
 
 const app = express();
 app.set('port', process.env.PORT || 3000);
+
 app.set('view engine', 'html');
 nunjucks.configure(path.join(__dirname, 'views'), {
     express: app,
     watch: true,
 });
 
-
-sequelize.sync({ force: false })
+sequelize.sync({force: false})
     .then(() => console.log('데이터베이스 연결 성공'))
     .catch(err => console.error(err));
 
-app.use(bodyParser.json())
 app.use(
     morgan('dev'),
-    express.static(path.join(__dirname, 'view')),
-    express.static(path.join(__dirname, 'view/users')),
-    express.static(path.join(__dirname, 'view/login')),
-    express.static(path.join(__dirname, 'view/board')),
+    express.static(path.join(__dirname, 'public')),
     express.json(),
     express.urlencoded({extended: false}),
     cookieParser(process.env.SECRET),
@@ -57,28 +51,25 @@ app.use(
         name: 'session-cookie'
     })
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/auth', loginRouter);
-app.use('/users', usersRouter);
-app.use('/menu', menuRouter);
-app.use('/file', fileManagementRouter);
+app.use('/auth', authRouter);
+app.use('/user', userRouter);
+app.use('/comment', commentRouter);
 app.use('/', indexRouter);
-app.use('/board', bordRouter);
-
 app.get('/favicon.ico', (req, res) => res.status(204));
+
 app.use((req, res) =>
     res.render('index', {
         title: require('./package.json').name,
         port: app.get('port'),
         user: req.user
     }));
-app.use((req, res, next) => {
-    next('Not found error!');
-});
 
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
+    console.error(err);
     res.status(500).send(err);
 });
 

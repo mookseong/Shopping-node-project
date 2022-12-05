@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>NodeJS: {{title}}</title>
+</head>
+
+<body>
+    <p>
+        <form id="form" action="" method="post">
+            사용자 정보 등록<br>
+            <input type="text" name="id" placeholder="ID" /><br>
+            <input type="text" name="password" placeholder="Password" /><br>
+            <input type="text" name="name" placeholder="Name" /><br>
+            <input type="text" name="description" placeholder="Description" /><br>
+            <button type="submit">전송</button>
+        </form>
+
+        <br>
+
+        <form id="form" action="update" method="post">
+            사용자 정보 수정<br>
+            <input type="text" name="id" placeholder="ID" /><br>
+            <input type="description" name="description" placeholder="Description" /><br>
+            <button type="submit">전송</button>
+        </form>
+    </p>
+
+    <p>
+        사용자 정보 삭제<br>
+        {% for userId in users %}
+            <a href="http://localhost:{{port}}/user/delete/{{userId}}">http://localhost:{{port}}/user/delete/{{userId}}</a><br>
+        {% endfor %}
+    </p>
+
+    <p>
+        사용자 포스트 정보<br>
+        {% for userId in users %}
+            <a href="http://localhost:{{port}}/user/{{userId}}/comments">http://localhost:{{port}}/user/{{userId}}/comments</a><br>
+        {% endfor %}
+    </p>
+
+    <p>
+        사용자 정보<br>
+        {% for userId in users %}
+            <a href="http://localhost:{{port}}/user/{{userId}}">http://localhost:{{port}}/user/{{userId}}</a><br>
+        {% endfor %}
+    </p>
+</body>
+
+</html>

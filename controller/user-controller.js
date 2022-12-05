@@ -1,13 +1,5 @@
 const userService = require("../service/user-service");
-const userRepository = require("../repository/user-repository");
-const User = require("../models/user");
 
-exports.getUserKey = async (req, res, next) => {
-    console.log(Object.keys(global.users))
-    res.render('user', {
-        title: require('../package.json').name, port: process.env.PORT, users: Object.keys(global.users)
-    })
-};
 
 exports.findUser = async (req, res, next) => {
     res.send(userService.getUser(req.params.id));
