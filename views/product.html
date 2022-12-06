@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>NodeJS: {{title}}</title>
+</head>
+
+<body>
+  <p>
+      <form id="form" action="" method="post">
+        상품 정보 등록<br>
+        <input type="text" name="num" placeholder="Number" /><br>
+        <input type="text" name="name" placeholder="Name" /><br>
+        <input type="text" name="price" placeholder="Price" /><br>
+        <input type="text" name="description" placeholder="Description" /><br>
+        <button type="submit">등록</button>
+      </form>
+
+      <br>
+
+      <form id="form" action="update" method="post">
+        상품 정보 수정<br>
+        <input type="text" name="num" placeholder="Number" /><br>
+        <input type="text" name="name" placeholder="Name" /><br>
+        <input type="text" name="price" placeholder="Price" /><br>
+        <input type="description" name="description" placeholder="Description" /><br>
+        <button type="submit">전송</button>
+      </form>
+  </p>
+
+  <p>
+    상품 정보 삭제<br>
+    {% for num in products %}
+    <a href="http://localhost:{{port}}/product/delete/{{num}}">http://localhost:{{port}}/product/dit/{{num}}</a><br>
+    {% endfor %}
+  </p>
+
+  <p>
+    특정 상품 정보<br>
+    {% for num in products %}
+    <a href="http://localhost:{{port}}/product/{{num}}">http://localhost:{{port}}/product/rit/{{num}}</a><br>
+    {% endfor %}
+  </p>
+</body>
+
+</html>
