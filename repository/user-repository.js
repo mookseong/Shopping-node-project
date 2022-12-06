@@ -1,8 +1,10 @@
 const User = require('../models/user');
+const {Comment} = require("../models");
 
 exports.findUserById = (id) => User.findOne({where: {id}});
 
 exports.findAllUser = () => User.findAll({attributes: ['id', 'name', 'description']});
+
 
 exports.createUser = (id, password, name, description) => User.create({id, password, name, description});
 
