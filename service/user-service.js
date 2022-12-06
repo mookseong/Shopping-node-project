@@ -14,7 +14,7 @@ exports.createUser = async (id, password, name, description) => {
 
 exports.updateUser = async (id, description) => {
     const result = await userRepository.updateUser(id, description);
-    if (!result){
+    if (!result) {
         console.error(`[UserService]유저정보 업데이트 실패. `);
         throw ('Not updated!');
     }
@@ -30,13 +30,18 @@ exports.deleteUser = async (id) => {
     console.log(`${id} 유저 삭제 완료`)
 };
 
-exports.findAllUser = async () =>{
+exports.findAllUser = async () => {
     console.log(`[UserService] 유저정보 요청`)
-    return await userRepository.findAllUser()
+    const user = await userRepository.findAllUser()
+    if (!user) {
+        console.error("[UserService] 유저 정보 없음");
+        throw `유저 정보 없음`;
+    }
+    return user
 };
 
 exports.getUser = async (id) => {
     const user = await userRepository.getUser(id);
-    if (user) throw `${id} 유저 정보 없음`;
+    if (!user) throw `[UserService] ${id} 유저 정보 없음`;
     return user
 };

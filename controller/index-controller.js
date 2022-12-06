@@ -12,7 +12,7 @@ exports.usersIndex = async (req, res, next) => {
 };
 
 exports.usersComments = async (req, res, next) => {
-    await commentService.findAllUser()
+    await commentService.findAllComment()
         .then((comments) => res.json(comments))
         .catch(err => {
             console.error(err);

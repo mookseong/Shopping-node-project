@@ -14,12 +14,7 @@ exports.getUser = async (req, res, next) => {
                 users: user.map(user => user.id)
             });
         })
-        .catch(err => {
-                console.error(err)
-                next(err)
-
-            }
-        );
+        .catch(err => next(err));
 };
 
 exports.createUser = async (req, res, next) => {
