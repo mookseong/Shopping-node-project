@@ -16,6 +16,7 @@ const passportConfig = require('./passport');
 const authRouter = require('./routes/auth-router');
 const userRouter = require('./routes/user-router');
 const commentRouter = require('./routes/comment');
+const productRouter = require('./routes/product-router');
 const indexRouter = require('./routes');
 
 dotenv.config();
@@ -58,6 +59,7 @@ app.use(passport.session());
 app.use('/auth', authRouter);
 app.use('/user', userRouter);
 app.use('/comment', commentRouter);
+app.use('/product', productRouter);
 app.use('/', indexRouter);
 app.get('/favicon.ico', (req, res) => res.status(204));
 
