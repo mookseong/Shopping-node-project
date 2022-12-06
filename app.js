@@ -13,8 +13,8 @@ const {sequelize} = require('./models');
 const passport = require('passport');
 const passportConfig = require('./passport');
 
-const authRouter = require('./routes/auth');
-const userRouter = require('./routes/user');
+const authRouter = require('./routes/auth-router');
+const userRouter = require('./routes/user-router');
 const commentRouter = require('./routes/comment');
 const indexRouter = require('./routes');
 
