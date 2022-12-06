@@ -1,44 +1,13 @@
 const express = require('express');
-const { User, Comment } = require('../models');
+const indexController = require("../controller/index-controller");
 
 
 const router = express.Router();
 
-router.get('/users', async (req, res, next) => {
-    try {
-        const users = await User.findAll({
-            attributes: ['id', 'name', 'description']
-        });
-        res.json(users);
-    } catch (err) {
-        console.error(err);
-        next(err);
-    }
-});
+router.get('/users', indexController.usersIndex);
 
-router.get('/comments', async (req, res, next) => {
-    try {
-        const comments = await Comment.findAll({});
-        res.json(comments);
-    } catch (err) {
-        console.error(err);
-        next(err);
-    }
-});
+router.get('/comments', indexController.usersComments);
 
-router.get('/data', async (req, res, next) => {
-    try {
-        const users = await User.findAll({
-            attributes: ['id', 'name', 'description'],
-            include: {
-                model: Comment
-            }
-        });
-        res.json(users);
-    } catch (err) {
-        console.error(err);
-        next(err);
-    }
-});
+router.get('/data', indexController.usersDataComments);
 
 module.exports = router;

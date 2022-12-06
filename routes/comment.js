@@ -1,13 +1,13 @@
 const express = require('express');
 const Comment = require('../models/comment');
+const authController = require("../controller/auth-controller");
 
-const { isLoggedIn } = require('./helpers');
 
 
 const router = express.Router();
 
 router.route('/')
-    .get(isLoggedIn, (req, res) => {
+    .get( authController.isLoggedIn, (req, res) => {
         res.render('comment', {
             title: require('../package.json').name,
             userId: req.user.id
