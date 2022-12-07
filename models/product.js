@@ -3,15 +3,21 @@ const Sequelize = require('sequelize');
 module.exports = class Product extends Sequelize.Model {
     static init(sequelize) {
         return super.init({
-            name: {
+            productID:{
+                type: Sequelize.INTEGER,
+                autoIncrement: true,
+                allowNull: false,
+                primaryKey: true
+            },
+            productName: {
                 type: Sequelize.STRING(100),
                 allowNull: false
             },
-            price: {
+            productPrice: {
                 type: Sequelize.INTEGER,
                 allowNull: false
             },
-            description: {
+            productDescription: {
                 type: Sequelize.TEXT,
                 allowNull: true
             }

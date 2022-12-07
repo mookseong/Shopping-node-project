@@ -2,7 +2,9 @@ const userService = require("../service/user-service");
 
 
 exports.findUser = async (req, res, next) => {
-    res.send(userService.findAllUser(req.params.id));
+    await userService.getUser(req.params.id)
+        .then((user) => res.json(user))
+        .catch(err => next(err));
 };
 
 exports.getUser = async (req, res, next) => {
@@ -25,14 +27,15 @@ exports.createUser = async (req, res, next) => {
 };
 
 exports.updateUser = async (req, res, next) => {
-    userService.updateUser(req.body.id, req.body.description)
+    const {id, description} = req.body;
+    await userService.updateUser(id, description)
         .then(() => res.redirect('/'))
         .catch(err => next(err));
 };
 
 exports.deleteUser = async (req, res, next) => {
     const id = req.params.id;
-    userService.deleteUser(id)
+    await userService.deleteUser(id)
         .then(() => res.redirect('/'))
         .catch(err => next(err));
 };

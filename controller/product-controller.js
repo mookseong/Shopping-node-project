@@ -19,7 +19,7 @@ exports.allProduct = async (req, res, next) => {
             res.render('product', {
                 title: require('../package.json').name,
                 port: process.env.PORT,
-                products: product.map(product => product.id)
+                products: product.map(product => product.productID)
             });
         })
         .catch(err => next(err));

@@ -30,6 +30,7 @@ exports.deleteUser = async (id) => {
     console.log(`${id} 유저 삭제 완료`)
 };
 
+
 exports.findAllUser = async () => {
     console.log(`[UserService] 유저정보 요청`)
     const user = await userRepository.findAllUser()

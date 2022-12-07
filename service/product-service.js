@@ -24,6 +24,17 @@ exports.allProduct = async () => {
     }
     return product;
 }
+exports.allProductList = async () => {
+    console.log(`[ProductService] 상품 정보 요청`);
+    const product = await productRepository.allProductList()
+    if (!product) {
+        console.error(`[productService] 상품 정보 없음`);
+        throw `상품 정보 없음`;
+    }
+    return product;
+}
+
+
 
 exports.updateProduct = async (id, name, price, description) => {
     const product = await productRepository.updateProduct(id, name, price, description);

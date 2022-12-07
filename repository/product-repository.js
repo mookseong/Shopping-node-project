@@ -1,19 +1,23 @@
 const Product = require("../models/product");
+const Sequelize = require("sequelize");
 
-exports.createProduct = (name, price, description) => Product.create({name, price, description});
+exports.createProduct = (productName, productPrice, productDescription) => Product.create({
+    productName, productPrice, productDescription
+});
 
-exports.getProduct = (id) => Product.findOne({
-    where: {id}, attributes: ['id', 'name', 'price', 'description']
+exports.getProduct = (productID) => Product.findOne({
+    where: {productID}, attributes: ['productID', 'productName', 'productPrice', 'productDescription']
 });
 
 exports.allProduct = () => Product.findAll({});
 
-exports.updateProduct = (id, name, price, description) => Product.update({
-    name: name,
-    price: price,
-    description: description
-}, {
-    where: {id: id}
-});
+exports.allProductList = () => Product.findAll({attributes: ['productID']});
 
-exports.deleteProduct = (id) => Product.destroy({where: {id}});
+exports.updateProduct = (productID, productName, productPrice, productDescription) => Product.update({
+    productName,
+    productPrice,
+    productDescription
+}, {where: {productID}});
+
+exports.deleteProduct = (productID) => Product.destroy({where: {productID}});
+
