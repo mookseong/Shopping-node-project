@@ -1,5 +1,6 @@
 const userService = require("../service/user-service");
-const commentService = require("../service/comment-service")
+const commentService = require("../service/comment-service");
+const productService = require("../service/product-service");
 
 
 exports.usersIndex = async (req, res, next) => {
@@ -28,3 +29,12 @@ exports.usersDataComments = async (req, res, next) => {
             next(err);
         })
 };
+
+exports.productsIndex = async (req, res, next) => {
+    await productService.allProduct()
+        .then((products) => res.json(products))
+        .catch(err => {
+            console.error(err);
+            next(err);
+        })
+}

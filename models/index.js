@@ -24,6 +24,7 @@ Product.init(sequelize);
 
 User.associate(db);
 Comment.associate(db);
+Product.associate(db);
 
 
 module.exports = db;

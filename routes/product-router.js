@@ -1,94 +1,30 @@
 const express = require('express');
-const Product = require("../models/product");
-
+const bodyParser = require("body-parser");
 const router = express.Router();
+const productController = require("../controller/product-controller");
+
+router.use(bodyParser.json());
 
 
-router.route('/')
-    .get(async (req, res, next) => {
-        try {
-            const products = await Product.findAll({
-                attributes: ['num']
-            });
+router.get('/', productController.allProduct)
 
-            res.render('product', {
-                title: require('../package.json').name,
-                port: process.env.PORT,
-                products: products.map(products => products.num)
-            });
-        } catch (err) {
-            console.error(err);
-            next(err);
-        }
-    })
-    .post(async (req, res, next) => {
-        const { num, name, price, description } = req.body;
+router.post('/', productController.createProduct);
+// 상품 정보 조회 API
+router.get('/:id', productController.findProduct);
+// 상품 정보 추가 API
+router.post('/cit', productController.createProduct);
+// 상품 정보 수정 API
+router.post('/update', productController.updateProduct);
+// 상품 정보 삭제 API
+router.get('/delete/:id', productController.deleteProduct);
 
-        const product = await Product.findOne({ where: { num } });
-        if (product) {
-            next('이미 등록된 상품 번호입니다.');
-            return;
-        }
-
-        try {
-            await Product.create({
-                num,
-                name,
-                price,
-                description
-            });
-
-            res.redirect('/');
-        } catch (err) {
-            console.error(err);
-            next(err);
-        }
-    });
-
-router.post('/update', async (req, res, next) => {
-    try {
-        const result = await Product.update({
-            name: req.body.name,
-            price: req.body.price,
-            description: req.body.description
-        }, {
-            where: { num: req.body.num }
-        });
-
-        if (result) res.redirect('/');
-        else next(`There is no product with ${req.params.num}.`);
-    } catch (err) {
-        console.error(err);
-        next(err);
-    }
+router.use((req, res, next) => {
+    next('Not found error!');
 });
 
-router.get('/delete/:num', async (req, res, next) => {
-    try {
-        const result = await Product.destroy({
-            where: { num: req.params.num }
-        });
-
-        if (result) next();
-        else next(`There is no product with ${req.params.num}.`);
-    } catch (err) {
-        console.error(err);
-        next(err);
-    }
+router.use((err, req, res, next) => {
+    res.status(500).send(err.toString());
 });
 
-router.get('/:num', async (req, res, next) => {
-    try {
-        const product = await Product.findOne({
-            where: {num: req.params.num},
-            attributes: ['num', 'name', 'price', 'description']
-        });
-        if (product) res.json(product);
-        else next(`There is no product with ${req.params.num}`);
-    } catch (err) {
-        console.error(err);
-        next(err);
-    }
-});
 
 module.exports = router;

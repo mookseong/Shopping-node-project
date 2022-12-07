@@ -3,11 +3,6 @@ const Sequelize = require('sequelize');
 module.exports = class Product extends Sequelize.Model {
     static init(sequelize) {
         return super.init({
-            num: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-                primaryKey: true
-            },
             name: {
                 type: Sequelize.STRING(100),
                 allowNull: false
@@ -30,5 +25,9 @@ module.exports = class Product extends Sequelize.Model {
             charset: 'utf8mb4',
             collate: 'utf8mb4_general_ci',
         });
+    }
+
+    static associate(db) {
+        db.Product.belongsTo(db.User, { foreignKey: 'userId', targetKey: 'id' });
     }
 }

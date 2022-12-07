@@ -1,46 +1,40 @@
 const productService = require("../service/product-service")
 
-exports.createProduct = (req, res, next) => {
-    const {num, name, price, description} = req.body;
-
-    productService.createProduct(num, name, price, description)
+exports.createProduct = async (req, res, next) => {
+    const {name, price, description} = req.body;
+    await productService.createProduct(name, price, description)
         .then(() => res.redirect('/'))
-        .catch(
-            err => {
-                next(err);
-                console.log(`Product created failed. Error : ${err}`);
-            }
-        );
+        .catch(err => next(err));
 };
 
-exports.findProduct = async (req, res) => { // req를 인자로 넘기니까 req요청이 없는 상태에서 undefined 참조하는 거 같음
-    const product = await productService.getProduct(req.body.num);
-    res.json(product);
+exports.findProduct = async (req, res, next) => {
+    await productService.getProduct(req.params.id)
+        .then((products) => res.json(products))
+        .catch(err => next(err))
 };
 
-exports.allProduct = (req, res) => { // 여기도..
-    res.send(JSON.stringify(productService.allProduct()));
+exports.allProduct = async (req, res, next) => {
+    await productService.allProduct()
+        .then((product) => {
+            res.render('product', {
+                title: require('../package.json').name,
+                port: process.env.PORT,
+                products: product.map(product => product.id)
+            });
+        })
+        .catch(err => next(err));
 };
 
 exports.updateProduct = (req, res, next) => {
-    productService.updateProduct(req.body.num, req.body.name, req.body.price, req.body.description)
-    .then(() => res.redirect('/'))
-    .catch(
-        err => {
-            next(err);
-            console.log(`Product update failed. Error : ${err}`);
-        }
-    );
+    const {id, name, price, description} = req.body;
+    productService.updateProduct(id, name, price, description)
+         .then(() => res.redirect('/'))
+         .catch(err => next(err));
 };
 
 exports.deleteProduct = (req, res, next) => {
-    const num = req?.query?.num;
-    productService.deleteProduct(num)
+    const id = req.params.id;
+    productService.deleteProduct(id)
         .then(() => res.redirect('/'))
-        .catch(
-            err => {
-                next(err);
-                console.log(`'Product delete failed. Error : ${err}`);
-            }
-        );
+        .catch(err => next(err));
 };

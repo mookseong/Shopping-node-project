@@ -1,21 +1,19 @@
 const Product = require("../models/product");
 
-exports.createProduct = (num, name, price, description) => Product.create({num, name, price, description});
+exports.createProduct = (name, price, description) => Product.create({name, price, description});
 
-exports.getProduct = async (num) => {
-    return await Product.findOne({where: {num}});
-}
+exports.getProduct = (id) => Product.findOne({
+    where: {id}, attributes: ['id', 'name', 'price', 'description']
+});
 
-exports.allProduct = async () => {
-    return await Product.findAll({});
-}
+exports.allProduct = () => Product.findAll({});
 
-exports.updateProduct = (num, name, price, description) => Product.update({
+exports.updateProduct = (id, name, price, description) => Product.update({
     name: name,
     price: price,
     description: description
 }, {
-    where: {num}
+    where: {id: id}
 });
 
-exports.deleteProduct = (num) => Product.destroy({where: {num}});
+exports.deleteProduct = (id) => Product.destroy({where: {id}});
