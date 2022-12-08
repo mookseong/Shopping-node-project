@@ -9,15 +9,11 @@ const response = require("../data/ResponseFrom");
 router.use(bodyParser.json());
 
 
-router.get('/', userController.getUser);
-
-router.get('/:id', userController.findUser);
-
+router.get('/', authService.isLoggedIn, authService.isPermissionIn, userController.getUser);
+router.get('/:id', authService.isLoggedIn, userController.findUser);
 router.post('/cid', userController.createUser);
-
-router.post('/uid', authService.isLoggedIn, userController.updateUser);
-
-router.get('/did/:id', authService.isLoggedIn, userController.deleteUser, authController.logout);
+router.post('/uid', authService.isLoggedIn, authService.isPermissionIn, userController.updateUser);
+router.get('/did/:id', authService.isLoggedIn, authService.isPermissionIn, userController.deleteUser, authController.logout);
 
 router.use((req, res, next) => {
     next('Not found error!');

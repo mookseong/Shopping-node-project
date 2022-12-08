@@ -13,11 +13,12 @@ exports.createUser = async (id, password, name, description) => {
 };
 
 exports.updateUser = async (id, description) => {
-    const result = await userRepository.updateUser(id, description);
-    if (!result) {
+    const user = await userRepository.findUserById(id);
+    if (!user) {
         console.error(`[UserService]유저정보 업데이트 실패. `);
         throw ('Not updated!');
     }
+    await userRepository.updateUser(id, description);
     console.log(`${id} 유저 정보 업데이트 완료`)
 };
 

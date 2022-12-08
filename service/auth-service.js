@@ -10,5 +10,9 @@ exports.isNotLoggedIn = async (req, res, next) => {
 };
 
 exports.isPermissionIn = async (req, res, next) => {
-    if (await userRepository.getUserPermission(req.user.id) || req.body.id === req.user.id) next(); else res.redirect(`/`);
+    if ((await userRepository.getUserPermission(req.user.id)).permission || req.body.id === req.user.id) next(); else res.json(response.responseFromMessage("[AuthService]권한이 없습니다."));
+};
+
+exports.isAdminIn = async (req, res, next) => {
+    if ((await userRepository.getUserPermission(req.user.id)).permission) next(); else res.json(response.responseFromMessage("[AuthService]권한이 없습니다."));
 };

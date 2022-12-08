@@ -4,11 +4,8 @@ const authService = require("../service/auth-service");
 const response = require("../data/ResponseFrom");
 const router = express.Router();
 
-
 router.get('/cid/:id', authService.isLoggedIn, cartController.addShoppingCart);
-
 router.get('/did/:id', authService.isLoggedIn, cartController.deleteCartList);
-
 router.get('/', authService.isLoggedIn, cartController.allCartList);
 
 

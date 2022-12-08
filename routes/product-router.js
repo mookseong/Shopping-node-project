@@ -7,8 +7,9 @@ const response = require("../data/ResponseFrom");
 
 router.use(bodyParser.json());
 
-router.get('/', productController.allProduct);
-router.get('/:id', productController.findProduct);
+
+router.get('/', authService.isLoggedIn, productController.allProduct);
+router.get('/:id', authService.isLoggedIn, productController.findProduct);
 router.post('/cid', authService.isLoggedIn, productController.createProduct);
 router.post('/uid', authService.isLoggedIn, productController.updateProduct);
 router.get('/did/:id', authService.isLoggedIn, productController.deleteProduct);

@@ -7,7 +7,6 @@ const response = require("../data/ResponseFrom");
 router.post('/login', authController.login);
 
 router.get('/logout', authService.isLoggedIn, authController.logout);
-
 router.get('/kakao', authController.kakao);
 router.get('/kakao/callback', authController.kakaoCall, (req, res) => res.redirect('/'));
 
