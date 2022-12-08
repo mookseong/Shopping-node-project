@@ -18,6 +18,7 @@ const userRouter = require('./routes/user-router');
 const commentRouter = require('./routes/comment');
 const productRouter = require('./routes/product-router');
 const cartRouter = require('./routes/cart-router');
+const adminRouter = require('./routes/admin-router');
 const indexRouter = require('./routes');
 const methodOverride = require('method-override');
 
@@ -63,7 +64,8 @@ app.use('/auth', authRouter);
 app.use('/user', userRouter);
 app.use('/comment', commentRouter);
 app.use('/product', productRouter);
-app.use('/cart', cartRouter)
+app.use('/cart', cartRouter);
+app.use('/admin', adminRouter);
 
 app.get('/favicon.ico', (req, res) => res.status(204));
 
