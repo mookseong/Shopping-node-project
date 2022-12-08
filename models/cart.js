@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-module.exports = class Basket extends Sequelize.Model {
+module.exports = class Cart extends Sequelize.Model {
     static init(sequelize) {
         return super.init({
             number: {
@@ -12,8 +12,8 @@ module.exports = class Basket extends Sequelize.Model {
         }, {
             sequelize,
             timestamps: false,
-            modelName: 'Basket',
-            tableName: 'baskets',
+            modelName: 'Cart',
+            tableName: 'carts',
             paranoid: false,
             charset: 'utf8mb4',
             collate: 'utf8mb4_general_ci'
@@ -21,7 +21,7 @@ module.exports = class Basket extends Sequelize.Model {
     }
 
     static associate(db) {
-        db.Basket.belongsTo(db.User, { foreignKey: 'userId', targetKey: 'id' });
-        db.Basket.belongsTo(db.Product, { foreignKey: 'productNum', targetKey: 'productID' });
+        db.Cart.belongsTo(db.User, { foreignKey: 'userId', targetKey: 'id' });
+        db.Cart.belongsTo(db.Product, { foreignKey: 'productNum', targetKey: 'productID' });
     }
 };

@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const User = require('./user');
 const Comment = require('./comment');
 const Product = require('./product');
-const Basket = require('./basket');
+const Basket = require('./cart');
 
 const env = process.env.NODE_ENV || 'development';
 const config = require('../config/config')[env];
@@ -17,7 +17,7 @@ db.Sequelize = Sequelize;
 
 db.User = User;
 db.Comment = Comment;
-db.Basket = Basket;
+db.Cart = Basket;
 db.Product = Product;
 
 User.init(sequelize);

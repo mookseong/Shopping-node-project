@@ -17,6 +17,7 @@ const authRouter = require('./routes/auth-router');
 const userRouter = require('./routes/user-router');
 const commentRouter = require('./routes/comment');
 const productRouter = require('./routes/product-router');
+const cartRouter = require('./routes/cart-router');
 const indexRouter = require('./routes');
 const methodOverride = require('method-override');
 
@@ -56,13 +57,14 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(methodOverride('_method'));
 
+app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/user', userRouter);
 app.use('/comment', commentRouter);
 app.use('/product', productRouter);
-app.use('/', indexRouter);
+app.use('/cart', cartRouter)
+
 app.get('/favicon.ico', (req, res) => res.status(204));
 
 app.use((req, res) =>
