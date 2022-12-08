@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 const User = require('./user');
-const Comment = require('./comment');
 const Product = require('./product');
 const Basket = require('./cart');
 
@@ -16,17 +15,14 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 db.User = User;
-db.Comment = Comment;
 db.Cart = Basket;
 db.Product = Product;
 
 User.init(sequelize);
-Comment.init(sequelize);
 Product.init(sequelize);
 Basket.init(sequelize);
 
 User.associate(db);
-Comment.associate(db);
 Product.associate(db);
 Basket.associate(db);
 

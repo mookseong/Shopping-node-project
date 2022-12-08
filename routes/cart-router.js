@@ -1,6 +1,7 @@
 const express = require('express')
 const cartController = require("../controller/cart-controller");
 const authService = require("../service/auth-service");
+const response = require("../data/ResponseFrom");
 const router = express.Router();
 
 
@@ -16,7 +17,7 @@ router.use((req, res, next) => {
 });
 
 router.use((err, req, res, next) => {
-    res.status(500).send(err.toString());
+    res.status(500).json(response.responseFromData("[cart]에러 발생", err));
 });
 
 module.exports = router;

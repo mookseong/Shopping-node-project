@@ -1,33 +1,20 @@
 const cartService = require("../service/cart-service")
+const response = require("../data/ResponseFrom");
 
 exports.addShoppingCart = async (req, res, next) => {
     await cartService.createCart(req.params.id, req.user.id)
-        .then(() => res.redirect('/'))
+        .then(() => res.json((response.responseFromMessage("[cart]카트 추가 완료"))))
         .catch(err => next(err));
 };
 
 exports.allCartList = async (req, res, next) => {
     await cartService.getCart(req.user.id)
-        .then((cart) => {
-            if (req.header('User-Agent').toLowerCase().match(/chrome/))
-                res.render('cart', {
-                    title: require('../package.json').name,
-                    port: process.env.PORT,
-                    products: cart.map(cart => cart)
-                });
-            else
-                res.json(cart)
-        })
+        .then((cart) => res.json(response.responseFromData("[cart]카트 정보 요청 완료", cart)))
         .catch(err => next(err));
 };
 
 exports.deleteCartList = async (req, res, next) => {
     await cartService.deleteCart(req.params.id)
-        .then((cart) => {
-            res.render('cart', {
-                title: require('../package.json').name,
-                port: process.env.PORT
-            });
-        })
+        .then((cart) => res.json(response.responseFromData("[cart]카트 정보 삭제 완료", cart)))
         .catch(err => next(err));
 };

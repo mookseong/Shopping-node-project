@@ -7,7 +7,6 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
-const nunjucks = require('nunjucks');
 const {sequelize} = require('./models');
 
 const passport = require('passport');
@@ -15,11 +14,10 @@ const passportConfig = require('./passport');
 
 const authRouter = require('./routes/auth-router');
 const userRouter = require('./routes/user-router');
-const commentRouter = require('./routes/comment');
 const productRouter = require('./routes/product-router');
 const cartRouter = require('./routes/cart-router');
 const indexRouter = require('./routes');
-const methodOverride = require('method-override');
+const response = require("./data/ResponseFrom");
 
 dotenv.config();
 passportConfig();
@@ -27,19 +25,12 @@ passportConfig();
 const app = express();
 app.set('port', process.env.PORT || 3000);
 
-app.set('view engine', 'html');
-nunjucks.configure(path.join(__dirname, 'views'), {
-    express: app,
-    watch: true,
-});
-
 sequelize.sync({force: false})
     .then(() => console.log('데이터베이스 연결 성공'))
     .catch(err => console.error(err));
 
 app.use(
     morgan('dev'),
-    express.static(path.join(__dirname, 'public')),
     express.json(),
     express.urlencoded({extended: false}),
     cookieParser(process.env.SECRET),
@@ -61,22 +52,14 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/user', userRouter);
-app.use('/comment', commentRouter);
 app.use('/product', productRouter);
 app.use('/cart', cartRouter)
 
 app.get('/favicon.ico', (req, res) => res.status(204));
 
-app.use((req, res) =>
-    res.render('index', {
-        title: require('./package.json').name,
-        port: app.get('port'),
-        user: req.user
-    }));
-
 app.use((err, req, res, next) => {
     console.error(err);
-    res.status(500).send(err);
+    res.status(500).json(response.responseFromData("[app]잘못된 요청입니다.", err));
 });
 
 app.listen(app.get('port'), () => {

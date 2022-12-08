@@ -6,10 +6,6 @@ const router = express.Router();
 
 router.get('/users', indexController.usersIndex);
 
-router.get('/comments', indexController.usersComments);
-
-router.get('/data', indexController.usersDataComments);
-
 router.get('/products', indexController.productsIndex);
 
 

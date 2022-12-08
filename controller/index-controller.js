@@ -1,29 +1,11 @@
 const userService = require("../service/user-service");
-const commentService = require("../service/comment-service");
 const productService = require("../service/product-service");
+const response = require("../data/ResponseFrom");
 
 
 exports.usersIndex = async (req, res, next) => {
     await userService.findAllUser()
-        .then((users) => res.json(users))
-        .catch(err => {
-            console.error(err);
-            next(err);
-        })
-};
-
-exports.usersComments = async (req, res, next) => {
-    await commentService.findAllComment()
-        .then((comments) => res.json(comments))
-        .catch(err => {
-            console.error(err);
-            next(err);
-        })
-};
-
-exports.usersDataComments = async (req, res, next) => {
-    await commentService.findAllData()
-        .then((comments) => res.json(comments))
+        .then((users) => res.json(response.responseFromData("[user]유저 정보 요청 완료", users)))
         .catch(err => {
             console.error(err);
             next(err);
@@ -32,9 +14,9 @@ exports.usersDataComments = async (req, res, next) => {
 
 exports.productsIndex = async (req, res, next) => {
     await productService.allProduct()
-        .then((products) => res.json(products))
+        .then((products) => res.json(response.responseFromData("[product]모든 제품 요청 완료", products)))
         .catch(err => {
             console.error(err);
             next(err);
         })
-}
+};

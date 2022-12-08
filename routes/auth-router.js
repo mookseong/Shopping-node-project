@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router();
 const authController = require("../controller/auth-controller");
 const authService = require("../service/auth-service");
+const response = require("../data/ResponseFrom");
 
 router.post('/login', authController.login);
 
@@ -15,7 +16,7 @@ router.use((req, res, next) => {
 });
 
 router.use((err, req, res, next) => {
-    res.status(500).send(err.toString());
+    res.status(500).json(response.responseFromData("[auth]에러 발생", err));
 });
 
 module.exports = router;
