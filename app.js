@@ -16,6 +16,7 @@ const authRouter = require('./routes/auth-router');
 const userRouter = require('./routes/user-router');
 const productRouter = require('./routes/product-router');
 const cartRouter = require('./routes/cart-router');
+const adminRouter = require('./routes/admin-router');
 const indexRouter = require('./routes');
 const response = require("./data/ResponseFrom");
 
@@ -53,7 +54,8 @@ app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/user', userRouter);
 app.use('/product', productRouter);
-app.use('/cart', cartRouter)
+app.use('/cart', cartRouter);
+app.use('/admin', adminRouter);
 
 app.get('/favicon.ico', (req, res) => res.status(204));
 
