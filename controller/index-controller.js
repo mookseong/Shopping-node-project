@@ -5,9 +5,7 @@ const productService = require("../service/product-service");
 
 exports.usersIndex = async (req, res, next) => {
     await userService.findAllUser()
-        .then((users) => {
-            res.json(users)
-        })
+        .then((users) => res.json(users))
         .catch(err => {
             console.error(err);
             next(err);
@@ -34,9 +32,7 @@ exports.usersDataComments = async (req, res, next) => {
 
 exports.productsIndex = async (req, res, next) => {
     await productService.allProductList()
-        .then((products) => {
-            res.json(products)
-        })
+        .then((products) => res.json(products))
         .catch(err => {
             console.error(err);
             next(err);

@@ -12,8 +12,8 @@ module.exports = class Basket extends Sequelize.Model {
         }, {
             sequelize,
             timestamps: false,
-            modelName: 'Comment',
-            tableName: 'comments',
+            modelName: 'Basket',
+            tableName: 'baskets',
             paranoid: false,
             charset: 'utf8mb4',
             collate: 'utf8mb4_general_ci'
@@ -22,6 +22,6 @@ module.exports = class Basket extends Sequelize.Model {
 
     static associate(db) {
         db.Basket.belongsTo(db.User, { foreignKey: 'userId', targetKey: 'id' });
-        db.Basket.belongsTo(db.Product, { foreignKey: 'productId', targetKey: 'id' });
+        db.Basket.belongsTo(db.Product, { foreignKey: 'productNum', targetKey: 'productID' });
     }
 };

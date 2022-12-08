@@ -18,6 +18,7 @@ const userRouter = require('./routes/user-router');
 const commentRouter = require('./routes/comment');
 const productRouter = require('./routes/product-router');
 const indexRouter = require('./routes');
+const methodOverride = require('method-override');
 
 dotenv.config();
 passportConfig();
@@ -55,6 +56,7 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride('_method'));
 
 app.use('/auth', authRouter);
 app.use('/user', userRouter);

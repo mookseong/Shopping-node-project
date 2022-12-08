@@ -14,9 +14,7 @@ exports.allProduct = () => Product.findAll({});
 exports.allProductList = () => Product.findAll({attributes: ['productID']});
 
 exports.updateProduct = (productID, productName, productPrice, productDescription) => Product.update({
-    productName,
-    productPrice,
-    productDescription
+    productName, productPrice, productDescription
 }, {where: {productID}});
 
 exports.deleteProduct = (productID) => Product.destroy({where: {productID}});

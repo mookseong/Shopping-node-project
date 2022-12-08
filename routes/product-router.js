@@ -7,10 +7,10 @@ const authService = require("../service/auth-service");
 router.use(bodyParser.json());
 
 router.get('/', productController.allProduct)
-router.post('/', authService.isLoggedIn, productController.createProduct);
 router.get('/:id', productController.findProduct);
+router.post('/create', authService.isLoggedIn, productController.createProduct);
 router.post('/update', authService.isLoggedIn, productController.updateProduct);
-router.get('/delete/:id', authService.isLoggedIn, productController.deleteProduct);
+router.get('/:id', authService.isLoggedIn, productController.deleteProduct);
 
 router.use((req, res, next) => {
     next('Not found error!');

@@ -12,7 +12,7 @@ router.get('/', userController.getUser)
 router.post('/', userController.createUser);
 router.get('/:id', userController.findUser);
 router.post('/update', authService.isLoggedIn, userController.updateUser);
-router.get('/delete/:id', authService.isLoggedIn, userController.deleteUser, authController.logout);
+router.delete('/delete/:id', authService.isLoggedIn, userController.deleteUser, authController.logout);
 
 router.use((req, res, next) => {
     next('Not found error!');

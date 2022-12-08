@@ -10,11 +10,15 @@ exports.findUser = async (req, res, next) => {
 exports.getUser = async (req, res, next) => {
     await userService.findAllUser()
         .then((user) => {
-            res.render('user', {
-                title: require('../package.json').name,
-                port: process.env.PORT,
-                users: user.map(user => user.id)
-            });
+            if (req.header('User-Agent').toLowerCase().match(/chrome/))
+                res.render('user', {
+                    title: require('../package.json').name,
+                    port: process.env.PORT,
+                    users: user.map(user => user.id)
+                });
+            else
+                res.json(user)
+
         })
         .catch(err => next(err));
 };
