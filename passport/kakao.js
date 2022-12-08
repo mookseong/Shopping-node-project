@@ -1,7 +1,6 @@
 const passport = require('passport');
 const Strategy = require('passport-kakao').Strategy;
-
-const User = require('../models/user');
+const userRepository = require('../repository/user-repository')
 
 module.exports = () => {
     passport.use(new Strategy({
@@ -9,17 +8,10 @@ module.exports = () => {
         callbackURL: '/auth/kakao/callback',
     }, async (accessToken, refreshToken, profile, done) => {
         try {
-            let user = await User.findOne({
-                where: { id: profile.id }
-            });
+            let user = await userRepository.findUserById(profile.id);
 
             if (!user)
-                user = await User.create({
-                    id: profile.id,
-                    password: '',
-                    name: profile.username,
-                    description: profile._json.properties.profile_image
-                });
+                user = await userRepository.createUser(profile.id, '', profile.username, profile._json.properties.profile_image)
 
             done(null, user);
         } catch (error) {

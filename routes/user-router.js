@@ -9,10 +9,10 @@ router.use(bodyParser.json());
 
 
 router.get('/', userController.getUser)
-router.post('/', userController.createUser);
 router.get('/:id', userController.findUser);
-router.post('/update', authService.isLoggedIn, userController.updateUser);
-router.delete('/delete/:id', authService.isLoggedIn, userController.deleteUser, authController.logout);
+router.post('/cid', userController.createUser);
+router.post('/uid', authService.isLoggedIn, userController.updateUser);
+router.get('/did/:id', authService.isLoggedIn, userController.deleteUser, authController.logout);
 
 router.use((req, res, next) => {
     next('Not found error!');

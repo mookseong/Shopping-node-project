@@ -34,7 +34,7 @@ module.exports = class Product extends Sequelize.Model {
     }
 
     static associate(db) {
-        db.Product.hasMany(db.Basket, { foreignKey: 'productNum', sourceKey: 'productID' });
+        db.Product.hasMany(db.Cart, { foreignKey: 'productNum', sourceKey: 'productID' });
         db.Product.belongsTo(db.User, { foreignKey: 'userId', targetKey: 'id' });
     }
 }

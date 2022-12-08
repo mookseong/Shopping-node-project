@@ -8,9 +8,9 @@ router.use(bodyParser.json());
 
 router.get('/', productController.allProduct)
 router.get('/:id', productController.findProduct);
-router.post('/create', authService.isLoggedIn, productController.createProduct);
-router.post('/update', authService.isLoggedIn, productController.updateProduct);
-router.get('/:id', authService.isLoggedIn, productController.deleteProduct);
+router.post('/cid', authService.isLoggedIn, productController.createProduct);
+router.post('/uid', authService.isLoggedIn, productController.updateProduct);
+router.get('/did/:id', authService.isLoggedIn, productController.deleteProduct);
 
 router.use((req, res, next) => {
     next('Not found error!');

@@ -31,7 +31,7 @@ exports.usersDataComments = async (req, res, next) => {
 };
 
 exports.productsIndex = async (req, res, next) => {
-    await productService.allProductList()
+    await productService.allProduct()
         .then((products) => res.json(products))
         .catch(err => {
             console.error(err);
