@@ -14,6 +14,8 @@
 
 </div>
 
+## 프로젝트 깃허브
++ Shopping_NodeProject (https://github.com/mookseong/Shopping_NodeProject)
 
 ## 팀원소개
 + 임성묵 (https://github.com/mookseong)
