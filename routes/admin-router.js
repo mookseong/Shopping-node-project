@@ -11,14 +11,12 @@ const resTEXT = require("../data/responseString");
 router.use(bodyParser.json());
 
 
-router.get('/user/users', authService.isLoggedIn, authService.isAdminIn, indexController.usersIndex);
-router.get('/user/user', authService.isLoggedIn, authService.isAdminIn, userController.findUser);
+router.get('/user/', authService.isLoggedIn, authService.isAdminIn, indexController.usersIndex);
 router.get('/user/:id',authService.isLoggedIn, authService.isAdminIn,  userController.getUser);
 router.post('/user/cid',authService.isLoggedIn, authService.isAdminIn,  userController.createUser);
 router.post('/user/uid', authService.isLoggedIn, authService.isAdminIn,userController.updateUser);
 router.get('/user/did/:id',authService.isLoggedIn, authService.isAdminIn,  userController.deleteUser);
-router.get('/product/products',authService.isLoggedIn, authService.isAdminIn,  indexController.productsIndex);
-router.get('/product/product', authService.isLoggedIn, authService.isAdminIn, productController.allProduct);
+router.get('/product/',authService.isLoggedIn, authService.isAdminIn,  indexController.productsIndex);
 router.get('/product/:id', authService.isLoggedIn, authService.isAdminIn, productController.findProduct);
 router.post('/product/cit', authService.isLoggedIn, authService.isAdminIn, productController.createProduct);
 router.post('/product/uit', authService.isLoggedIn, authService.isAdminIn, productController.updateProduct);
