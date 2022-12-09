@@ -1,18 +1,21 @@
 exports.RESPONSE_TEXT = {
     SUCCESS: "success",
     FAIL: "fail",
-    PERMISSION_DENIED : "잘못된 접근이 확인되었습니다."
+    PERMISSION_DENIED: "잘못된 접근이 확인되었습니다."
 };
 
 exports.AUTH_MESSAGE = {
-    SUCCESS:"[auth]요청 처리 완료",
-    FAIL: "[auth]요청 처리 완료"
+    SUCCESS: "[AuthService]요청 처리 완료",
+    FAIL: "[AuthService]요청 처리 실패 했습니다.",
+    FAIL_IS_LOGIN: "[AuthService]로그인되지 않은 상태입니다.",
+    FAIL_IS_NOT_LOGIN: "[AuthService]로그인된 상태입니다.",
+    FAIL_NOT_PERMISSION: "[AuthService]권한이 없습니다."
 };
 
 
 exports.INDEX_MESSAGE = {
     SUCCESS: "[index]요청 처리 완료",
-    ERROR : "[user]요청 오류 발생",
+    ERROR: "[index]요청 오류 발생",
 };
 
 exports.PRODUCT_MESSAGE = {
@@ -20,7 +23,7 @@ exports.PRODUCT_MESSAGE = {
     DELETE: "[product]제품 삭제 완료",
     UPDATE: "[product]제품 업데이트 완료",
     GET: "[product]제품 요청 완료",
-    ERROR : "[product]요청 오류 발생"
+    ERROR: "[product]요청 오류 발생"
 };
 
 exports.USER_MESSAGE = {
@@ -28,7 +31,7 @@ exports.USER_MESSAGE = {
     DELETE: "[user]유저 정보 삭제 완료",
     UPDATE: "[user]유저 정보 업데이트 완료",
     GET: "[user]유저 정보 요청 완료",
-    ERROR : "[user]요청 오류 발생"
+    ERROR: "[user]요청 오류 발생"
 };
 
 exports.CART_MESSAGE = {
@@ -36,7 +39,7 @@ exports.CART_MESSAGE = {
     DELETE: "[cart]장바구니 정보 삭제 완료",
     UPDATE: "[cart]장바구니 정보 업데이트 완료",
     GET: "[cart]장바구니 정보 요청 완료",
-    ERROR : "[cart]요청 오류 발생"
+    ERROR: "[cart]요청 오류 발생"
 };
 
 exports.ADMIN_MESSAGE = {
@@ -44,5 +47,5 @@ exports.ADMIN_MESSAGE = {
     DELETE: "[admin]장바구니 정보 삭제 완료",
     UPDATE: "[admin]장바구니 정보 업데이트 완료",
     GET: "[admin]장바구니 정보 요청 완료",
-    ERROR : "[admin]요청 오류 발생"
+    ERROR: "[admin]요청 오류 발생"
 };

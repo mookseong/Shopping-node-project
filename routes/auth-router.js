@@ -5,7 +5,7 @@ const authService = require("../service/auth-service");
 const response = require("../data/responseFrom");
 const resTEXT = require("../data/responseString");
 
-router.post('/login', authController.login);
+router.post('/login', authService.isNotLoggedIn, authController.login);
 
 router.get('/logout', authService.isLoggedIn, authController.logout);
 router.get('/kakao', authController.kakao);
@@ -16,7 +16,7 @@ router.use((req, res, next) => {
 });
 
 router.use((err, req, res, next) => {
-    res.status(500).json(response.responseFromData(resTEXT.RESPONSE_TEXT.FAIL,resTEXT.AUTH_MESSAGE.FAIL, err));
+    res.status(500).json(response.responseFromData(resTEXT.RESPONSE_TEXT.FAIL, resTEXT.AUTH_MESSAGE.FAIL, err));
 });
 
 module.exports = router;

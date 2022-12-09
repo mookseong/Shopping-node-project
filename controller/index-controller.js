@@ -3,7 +3,7 @@ const productService = require("../service/product-service");
 const response = require("../data/responseFrom");
 const resTEXT = require("../data/responseString");
 
-exports.index = async (req, res, next) => res.status(200).send("<h1>안녕하세요 쇼핑몰 프로젝트입니다</h1>개발자 : 임성묵, 김동휘");
+exports.index = async (req, res) => res.status(200).send("<h1>안녕하세요 쇼핑몰 프로젝트입니다</h1>개발자 : 임성묵, 김동휘");
 
 exports.usersIndex = async (req, res, next) => {
     await userService.findAllUser()
@@ -11,7 +11,7 @@ exports.usersIndex = async (req, res, next) => {
         .catch(err => {
             console.error(err);
             next(err);
-        })
+        });
 };
 
 exports.productsIndex = async (req, res, next) => {
@@ -20,5 +20,5 @@ exports.productsIndex = async (req, res, next) => {
         .catch(err => {
             console.error(err);
             next(err);
-        })
+        });
 };

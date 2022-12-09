@@ -8,7 +8,6 @@ module.exports = () => {
         usernameField: 'id',
         passwordField: 'password'
     }, async (id, password, done) => {
-
         try {
             const user = await userRepository.findUserById(id);
             if (user && await bcrypt.compare(password, user.password))

@@ -9,7 +9,6 @@ module.exports = () => {
     }, async (accessToken, refreshToken, profile, done) => {
         try {
             let user = await userRepository.findUserById(profile.id);
-
             if (!user)
                 user = await userRepository.createUser(profile.id, '', profile.username, profile._json.properties.profile_image)
 

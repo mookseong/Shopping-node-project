@@ -3,7 +3,7 @@ const productRepository = require("../repository/product-repository");
 
 exports.getCart = async (userID) => {
     const carts = await cartRepository.getCart(userID);
-    if (!carts) throw `[CartService] ${id} 정보 없음`;
+    if (!carts) throw `[CartService] ${userID} 정보 없음`;
     return carts;
 };
 
