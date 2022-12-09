@@ -1,10 +1,15 @@
 const passport = require('passport');
-const response = require("../data/ResponseFrom");
+const response = require("../data/responseFrom");
+const resTEXT = require("../data/responseString");
 
 exports.login = (req, res, next) => {
     passport.authenticate('local', (authError, user, info) => {
         if (user) req.login(user, loginError =>
-            res.status(200).json(response.responseFromData("success","[auth]유저 로그인 완료", { userid : user.id, userName :user.name, userDescription : user.description}))); else next(info);
+            res.status(200).json(response.responseFromData(resTEXT.RESPONSE_TEXT.SUCCESS, resTEXT.AUTH_MESSAGE.SUCCESS, {
+                userid: user.id,
+                userName: user.name,
+                userDescription: user.description
+            }))); else next(info);
     })(req, res, next);
 
 };
@@ -14,7 +19,7 @@ exports.logout = async (req, res, next) => {
         req.session.destroy();
         if (err) {
             next(err);
-        } else res.json(response.responseFromMessage("success","[auth]유저 로그아웃 완료"));
+        } else res.json(response.responseFromMessage(resTEXT.RESPONSE_TEXT.SUCCESS, resTEXT.AUTH_MESSAGE.SUCCESS));
     });
 }
 

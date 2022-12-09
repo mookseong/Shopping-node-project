@@ -14,7 +14,8 @@ exports.createCart = async (id, userID) => {
         throw `상품 (${id})가 존재하지 않습니다.`;
     }
     await cartRepository.createCart(id, userID);
-};
+}
+
 exports.deleteCart = async (id) => {
     await cartRepository.deleteCart(id)
         .catch(err => {

@@ -1,7 +1,8 @@
 const express = require('express')
 const cartController = require("../controller/cart-controller");
 const authService = require("../service/auth-service");
-const response = require("../data/ResponseFrom");
+const response = require("../data/responseFrom");
+const resTEXT = require("../data/responseString");
 const router = express.Router();
 
 router.get('/cid/:id', authService.isLoggedIn, cartController.addShoppingCart);
@@ -14,7 +15,7 @@ router.use((req, res, next) => {
 });
 
 router.use((err, req, res, next) => {
-    res.status(500).json(response.responseFromData("fail","[cart]에러 발생", err));
+    res.status(500).json(response.responseFromData(resTEXT.RESPONSE_TEXT.FAIL, resTEXT.CART_MESSAGE.ERROR, err));
 });
 
 module.exports = router;
