@@ -6,13 +6,4 @@ exports.createCart = (number, userId) => Cart.create({productNum :number, userId
 
 exports.deleteCart = (number) => Cart.destroy({where: {number}});
 
-exports.getCart = (number) => Cart.findAll({
-    where: {number},
-    attributes: ['number'],
-    include: [{
-        model: Product,
-        attributes: ['productName', 'productPrice', 'productDescription']
-    }]
-});
-
-exports.getCart2 = (userId) => Cart.findAll({where: {userId}});
+exports.getCart = (userId) => Cart.findAll({where: {userId}});

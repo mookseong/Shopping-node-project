@@ -5,6 +5,7 @@ const authService = require("../service/auth-service");
 const userController = require("../controller/user-controller");
 const indexController = require("../controller/index-controller");
 const productController = require("../controller/product-controller");
+const response = require("../data/ResponseFrom");
 
 router.use(bodyParser.json());
 
@@ -27,7 +28,7 @@ router.use((req, res, next) => {
 });
 
 router.use((err, req, res, next) => {
-    res.status(500).send(err.toString());
+    res.status(500).json(response.responseFromData("fail","[admin]에러 발생", err));
 });
 
 

@@ -19,7 +19,7 @@ router.use((req, res, next) => {
 });
 
 router.use((err, req, res, next) => {
-    res.status(500).json(response.responseFromData("[product]에러 발생", err));
+    res.status(500).json(response.responseFromData("fail","[product]에러 발생", err));
 });
 
 

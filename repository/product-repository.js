@@ -1,7 +1,7 @@
 const Product = require("../models/product");
 
-exports.createProduct = (productName, productPrice, productDescription) => Product.create({
-    productName, productPrice, productDescription
+exports.createProduct = (productName, productPrice, productDescription, userId) => Product.create({
+    productName, productPrice, productDescription, userId
 });
 
 exports.getProduct = (productID) => Product.findOne({

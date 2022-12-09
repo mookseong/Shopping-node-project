@@ -30,5 +30,5 @@
     "nodemon": "^2.0.6",
     "nunjucks": "^3.2.3"
   },
-  "description": ""
+  "description": "> NodeJS를 이용하여 쇼핑사이트 REST API 설계 프로젝트 입니다. >"
 }

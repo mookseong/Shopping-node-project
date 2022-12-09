@@ -5,7 +5,7 @@ const response = require("../data/ResponseFrom");
 
 exports.usersIndex = async (req, res, next) => {
     await userService.findAllUser()
-        .then((users) => res.json(response.responseFromData("[user]유저 정보 요청 완료", users)))
+        .then((users) => res.status(200).json(response.responseFromData("success","[user]유저 정보 요청 완료", users)))
         .catch(err => {
             console.error(err);
             next(err);
@@ -14,7 +14,7 @@ exports.usersIndex = async (req, res, next) => {
 
 exports.productsIndex = async (req, res, next) => {
     await productService.allProduct()
-        .then((products) => res.json(response.responseFromData("[product]모든 제품 요청 완료", products)))
+        .then((products) => res.status(200).json(response.responseFromData("success","[product]모든 제품 요청 완료", products)))
         .catch(err => {
             console.error(err);
             next(err);

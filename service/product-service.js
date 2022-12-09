@@ -1,12 +1,12 @@
 const productRepository = require("../repository/product-repository");
 
-exports.createProduct = async (name, price, description) => {
+exports.createProduct = async (name, price, description, userID) => {
     const product = await productRepository.getProduct(name);
     if (product) {
         console.error(`[ProductService] 상품 추가 실패.`)
         throw `상품 (${name})가 이미 존재합니다.`;
     }
-    await productRepository.createProduct(name, price, description);
+    await productRepository.createProduct(name, price, description, userID);
 };
 
 exports.getProduct = async (id) => {

@@ -61,7 +61,7 @@ app.get('/favicon.ico', (req, res) => res.status(204));
 
 app.use((err, req, res, next) => {
     console.error(err);
-    res.status(500).json(response.responseFromData("[app]잘못된 요청입니다.", err));
+    res.status(500).json(response.responseFromData("failed","[app]잘못된 요청입니다.", err));
 });
 
 app.listen(app.get('port'), () => {

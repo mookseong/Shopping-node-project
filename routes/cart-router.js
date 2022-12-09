@@ -14,7 +14,7 @@ router.use((req, res, next) => {
 });
 
 router.use((err, req, res, next) => {
-    res.status(500).json(response.responseFromData("[cart]에러 발생", err));
+    res.status(500).json(response.responseFromData("fail","[cart]에러 발생", err));
 });
 
 module.exports = router;
